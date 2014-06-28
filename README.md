@@ -31,6 +31,8 @@ The folder IPT-Mobile-Presentation contains a NetBeans web project that could be
 deployed on Java EE 7 Appliction Server (e.g. Glassfish 4)
 
 Before deploing the demo application you should:
+
 1. Create a DB schema "ipt_presentation" by running the MySQL DB script sql/create.sql
+
 2. Create a DataSource for the created DB schema (ipt_presentation) and map it to the JNDI name "jdbc/ipt_presentation" referred in persistence.xml configuration file.
 
