@@ -1,0 +1,173 @@
+<!--  COPYRIGHT & LICENSE HEADER
+   DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+   
+   IPT Mobile Presentation demonstrates interactive mobile presentation
+   and login event notifications using WebSocket, JAX-RS (REST) & jQuery Mobile
+  
+   Copyright (c) 2012 - 2014 IPT - Intellectual Products & Technologies Ltd. 
+   All rights reserved.
+   
+   E-mail: office@iproduct.org
+   Web: http://iproduct.org/
+  
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License (the "License") 
+   as published by the Free Software Foundation version 2 of the License.
+   You may not use this file except in compliance with the License.  You can
+   obtain a copy of the License at root directory of this project in file 
+   LICENSE.txt.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License along
+   with this program; if not, write to the Free Software Foundation, Inc.,
+   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+   
+   When distributing the software, include this COPYRIGHT & LICENSE HEADER  
+   in each file, and include the License file LICENSE.txt in the root directory
+   of your distributable.
+  
+   GPL Classpath Exception:
+   IPT - Intellectual Products & Technologies (IPT) designates this particular 
+   file as subject to the "Classpath" exception as provided by IPT in 
+   the GPL Version 2 License file that accompanies this code.
+   
+   In case you modify this file,
+   please add the appropriate notice below the existing Copyright notices, 
+   with the fields enclosed in brackets {} replaced by your own identification:
+   "Portions Copyright (c) {year} {name of copyright owner}"
+ -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>IPT Mobile Presentation Demo</title>
+        <link rel="stylesheet" href="css/green_theme.css" />
+        <link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.2.min.css" />
+        <link rel="stylesheet" href="css/jqm-docs.css" /> 
+        <link rel="stylesheet" href="css/custom.css" />
+        <script src="js/jquery-1.11.1.js"></script>
+        <script src="js/epresentation.js"></script>
+        <script src="js/jquery.mobile-1.4.2.js"></script>
+
+    </head>
+    <body>
+        <!-- Pages -->
+        <div id="page-home" data-role="page">
+            <div role="main" data-role="content">
+                <p id="version">1.1.0 Final Release</p>
+                <h1 id="ipt-logo"><img src="css/images/ipt_logo.png" alt="jQuery Mobile Framework" /></h1>
+                <h1 class="caption">IPT Mobile Presentation Demo</h1>
+                <p class="intro"><strong>IPT Mobile Presentation</strong> provides 
+                    interactive mobile presentation using WebSocket, REST and jQuery Mobile. 
+                    NetBeans project available at 
+                    <a href="https://github.com/iproduct/IPT-Mobile-Presentation">GitHub</a>.
+                </p>
+                <p><a href="#page-presentations" data-role="button" data-transition="slide" data-theme="a">
+                        Show Presentations</a>
+                </p> 
+            </div><!-- /content -->
+            <div data-role="footer" class="footer-docs" data-position="fixed" data-theme="b">
+                <p>&copy; 2014 IPT - Intellectual Products & Technologies Ltd.</p>
+            </div><!-- /footer -->
+        </div>
+
+        <div id="page-presentations" data-role="page" data-theme="b">
+            <div data-role="header" data-theme="a">
+                <a data-role="back" href="#page-home" data-direction="reverse" data-icon="back">Back</a>
+                <h1>IPT Mobile Presentation<span class="logged-name"></span></h1>
+                <a href="#popup-login" data-icon="user" data-transition="pop" data-rel="popup" data-position-to="window"
+                   class="ui-shadow ui-btn-right ui-btn-icon-right" 
+                   id="button-login">Login</a>
+                <a href="#page-presentations" data-icon="user" class="ui-shadow ui-btn-right ui-btn-icon-right" 
+                   id="button-logout">Logout</a>
+            </div>
+            
+            <!-- Login Popup -->  
+            <div data-role="popup" id="popup-login" data-theme="b" data-overlay-theme="a" class="ui-corner-all">
+                <form>
+                    <div style="padding:10px 20px;">
+                        <h3>Please sign in</h3>
+                        <label for="name" class="ui-hidden-accessible">Your name:</label>
+                        <input name="name" id="name" value="" placeholder="Your name" data-theme="a" type="text">
+                        <!-- <label for="pw" class="ui-hidden-accessible">Password:</label>
+                        <input name="pass" id="pw" value="" placeholder="password" data-theme="a" type="password">-->
+                        <button type="button" id="button-sign" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-check">Sign in</button>
+                    </div>
+                </form>
+            </div>
+
+            <div data-role="content">
+                <ul id="presentations-list" data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a">
+                    <li data-role="list-divider">Available Presentations</li>
+                </ul>
+            </div>
+            <div data-role="footer" data-position="fixed" class="footer-docs" data-theme="b">
+                <p>&copy; 2014 IPT - Intellectual Products & Technologies Ltd.</p>
+            </div>
+        </div>
+
+        <div id="page-slides" data-role="page" data-theme="b">
+            <div data-role="header" data-position="inline" data-theme="a">
+                <a data-role="back" href="#page-presentations" data-direction="reverse" data-icon="back">Back</a>
+                <h1>IPT Mobile Presentation</h1>
+                <a href="#page-play" data-icon="arrow-r" class="ui-btn-right ui-btn-icon-right"
+                   id="button-play">Play</a>
+            </div>
+            <div data-role="content">
+                <ul id="slides-list" data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a">
+                    <li data-role="list-divider" class="presentation-name-container">Available Slides</li>
+                </ul>
+            </div>
+            <div data-role="footer" data-position="fixed" class="footer-docs" data-theme="b">
+                <p>&copy; 2014 IPT - Intellectual Products & Technologies Ltd.</p>
+            </div>
+        </div>
+
+        <div id="page-slide-details" data-role="page" data-theme="b">
+            <div data-role="header" data-position="inline" data-theme="a">
+                <a data-role="back" href="#page-slides" data-direction="reverse" data-icon="back">Back</a>
+                <h1>IPT Mobile Presentation</h1>
+            </div>
+            <div data-role="content">
+                <ul id="slide-details-list" data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a">
+                    <li data-role="list-divider"> 
+                        <span class="presentation-name-container">Presentation</span>: Slide 
+                        <span class="slide-id-container">Details</span>
+                    </li>
+                </ul>
+
+            </div>
+            <div data-role="footer" data-position="fixed" class="footer-docs" data-theme="b">
+                <p>&copy; 2014 IPT - Intellectual Products & Technologies Ltd.</p>
+            </div>
+        </div>
+
+        <div id="page-play" data-role="page" data-theme="b">
+            <div data-role="header" data-position="inline" data-theme="a">
+                <a data-role="back" href="#page-presentations" data-direction="reverse" data-icon="back">Back</a>
+                <h1 id="play-header">IPT Mobile Presentation</h1>
+            </div>
+            <div data-role="content" id="play-slide-container">
+            </div>
+            <div data-role="footer" data-position="fixed" class="footer-docs" data-theme="b">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a id="button-slide-first" href="#" data-icon="myapp-first"></a></li>
+                        <li><a id="button-slide-previous" href="#" data-icon="arrow-l"></a></li>
+                        <li><a id="button-slide-refresh" href="#" data-icon="refresh"></a></li>
+                        <li><a id="button-slide-next" href="#" data-icon="arrow-r"></a></li>
+                        <li><a id="button-slide-last" href="#" data-icon="myapp-last"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+</html>
