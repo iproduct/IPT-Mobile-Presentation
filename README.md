@@ -1,7 +1,7 @@
 IPT-Mobile-Presentation
 =======================
 
- IPT Mobile Presentation demonstrates interactive mobile presentation and login event notifications using WebSocket, JAX-RS (REST) &amp; jQuery Mobile
+IPT Mobile Presentation demonstrates interactive mobile presentation and login event notifications using WebSocket, JAX-RS (REST) & jQuery Mobile
 
 Copyright (c) 2012 - 2014 IPT - Intellectual Products & Technologies Ltd. All rights reserved.
 E-mail: office@iproduct.org,
